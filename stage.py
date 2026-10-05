@@ -10,7 +10,7 @@ def loaded():
     return open("/sys/kernel/kexec_loaded").read().strip()
 k = os.open("/boot/vmlinuz-6.12.111+deb13-cloud-amd64", os.O_RDONLY)
 i = os.open("/boot/initrd.img-6.12.111+deb13-cloud-amd64", os.O_RDONLY)
-cmd = b"console=ttyS0 root=/dev/vda rw init=/home/user/boot.sh ip=169.254.0.21::169.254.0.22:255.255.255.252:instance:eth0:off panic=-1"
+cmd = b"console=ttyS0 root=/dev/vda rw panic=-1 ip=169.254.0.21::169.254.0.22:255.255.255.252:instance:eth0:off"
 print("unload:", try_load(-1,-1,b"",1))
 r,e = try_load(k, i, cmd, 0)
 print("LOAD:", r, e, "| loaded:", loaded())
